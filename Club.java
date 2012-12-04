@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Club {
 
     //Attributs
-    private ArrayList adherents;
+    private ArrayList<Personne> adherents = new ArrayList<Personne>();
     private String nomClub;
 
     //Constructeurs
@@ -11,7 +11,6 @@ public class Club {
     public Club() {}
     
     public Club(Club c) {
-        this.adherents = new ArrayList();
         this.nomClub = c.getNomClub();
         for (int a = 0; a < c.getAdherents().size(); a += 1) {
             if (c.getAdherents().get(a) instanceof Etudiant) {
@@ -29,9 +28,9 @@ public class Club {
         }
     }
 
-    public Club(String unNomClub, Personne desAdherents[]) {
+    public Club(String unNomClub, ArrayList<Personne> desAdherents) {
         this.nomClub = unNomClub;
-        this.adherents = desAdherents;
+        this.adherents.addAll(desAdherents);
     }
 
     //Methodes
@@ -45,37 +44,36 @@ public class Club {
     }
 
     public void init() {
-        int nbAd = 50; //CONFIG
-        System.out.println("Veuillez entrer un nombre d'adhérents à affecter");
-        //Faire des trucs avec Lire
+        this.nomClub = Lire.jString("Veuillez entrer un nom pour le club. ");
+        int nbAd = Lire.jint("Veuillez entrer un nombre d'adhérents à affecter. ");
         for (int a = 0; a < nbAd; a += 1) {
             System.out.println("Si l'adhérent n°" + a + " est étudiant entrez 1." +
                     "\nSi il est salarié, entrez 2." + 
                     "\nSi il n'est ni l'un ni l'autre, tapez 0.");
-            int adType = 0; //Faire des trucs avec Lire
+            int adType = Lire.jint(); //Faire des trucs avec Lire
             if (adType == 1) {
                 Etudiant o = new Etudiant();
-                this.adherents[a] = o;
                 o.init();
+                this.adherents.add(o);
             }
             else if (adType == 2) {
                 Salarie o = new Salarie();
-                this.adherents[a] = o;
                 o.init();
+                this.adherents.add(o);
             }
             else if (adType == 0) {
                 Personne o = new Personne();
-                this.adherents[a] = o;
                 o.init();
+                this.adherents.add(o);
             }
         }
     }
 
     public String toString() {
         String adherList = "";
-        for (int a = 0; a < this.adherents.length; a += 1) {
-            Object o = this.adherents[a];
-            adherList += "\nPersonne n°" + (a+1) + " :\n" + o;
+        for (int a = 0; a < this.adherents.size(); a += 1) {
+            //Object o = this.adherents.get(a); TEST
+            adherList += "\nPersonne n°" + (a+1) + " :\n" + this.adherents.get(a);
         }
         return "Nom du club : " + this.nomClub + 
                "\nListe des adherents : " + adherList;

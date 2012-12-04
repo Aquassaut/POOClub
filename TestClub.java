@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class TestClub {
     public static void main(String[] args) {
         Personne p1, p2, p3;
@@ -23,12 +25,17 @@ public class TestClub {
         c1 = new Club();
         c2 = new Club();
         c3 = new Club();
-        Personne liste[] = {p1, e1, s1};
+        ArrayList<Personne> liste = new ArrayList<Personne>();
+        liste.add(p1);
+        liste.add(e1);
+        liste.add(s1);
         c1 = new Club("monClub", liste);
         System.out.println(c1);
-        c2 = new Club(c1);
+        c2 = new Club();
+        c2.init();
+        c3 = new Club(c2);
         System.out.println("on teste le club par copie : ");
-        System.out.println(c2);
+        System.out.println(c3);
     
     }
 
