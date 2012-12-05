@@ -47,7 +47,7 @@ public class Club {
         this.nomClub = Lire.jString("Veuillez entrer un nom pour le club. ");
         int nbAd = Lire.jint("Veuillez entrer un nombre d'adhérents à affecter. ");
         for (int a = 0; a < nbAd; a += 1) {
-            System.out.println("Si l'adhérent n°" + a + " est étudiant entrez 1." +
+            System.out.println("Si l'adhérent n°" + (a+1) + " est étudiant entrez 1." +
                     "\nSi il est salarié, entrez 2." + 
                     "\nSi il n'est ni l'un ni l'autre, tapez 0.");
             int adType = Lire.jint(); //Faire des trucs avec Lire
